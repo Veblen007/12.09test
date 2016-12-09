@@ -1,0 +1,37 @@
+diff a/12.02test.html b/12.02test.html	(rejected hunks)
+@@ -1,33 +1,32 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+ 	<meta charset="UTF-8">
+ 	<title>Document</title>
+ </head>
+ <body>
+ </body>
+ <script>
+ // var arr1=["abc","b","b","c","a"];
+ // function clearRepeat(x){
+ // 	var array=x;
+ // 	var arr2=[];
+ // 	for(var i=0;i<array.length;i++){
+ // 		var flag=true;
+ // 		for(var j=0;j<arr2.length;j++){
+ // 			if(array[i]==arr2[j]){
+ // 				flag=false;
+ // 				break;
+ // 			}
+ // 		}
+ // 		if(flag){
+ // 			arr2.push(array[i]);
+ // 		}
+ // 	};
+ // 	x=arr2;
+ // 	alert(x);
+ // }
+ // clearRepeat(arr1);
+-// alert(arr1);//11
+-
++// alert(arr1);
+ </script>
+ </html>
+\ No newline at end of file
