@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+<style>
+body{
+	background-image:url(images/90b685dec5e7edec6ab50db0c7a0d4c7.jpg);
+	background-position:top center;
+	background-size:cover;
+	
+	}
+.wutai{ 
+		width:500px;
+		
+		margin:0 auto;
+		perspective:3000px;
+		margin-top:100px;
+		position:relative;
+		
+	}
+ .box{
+	 position:relative;
+	 width:200px;
+	 transition:all 1s;
+	 margin:0 auto;
+	 height:550px;
+	 transform-style:preserve-3d;
+	 transform:rotateY(45deg) rotateX(90deg);
+	 margin-top:50px;
+	 }
+.box img{
+	display:block;
+	width:200px;
+	position:absolute;
+	box-shadow:0px 3px 10px #000;
+	transition:all 1.5s;
+	
+	
+	}
+#but_l{
+	position:absolute;
+	top:40px;
+	left:-300px;
+	}
+#but_r{
+	position:absolute;
+	top:40px;
+	right:-300px;
+	}
+.name01{
+	font-size:100px;
+	text-align:center;
+	position:fixed;
+	bottom:0;
+	left:0;
+	color:white;
+	width:100%;
+	font-family:"Courier New", Courier, monospace;
+	transform-style:preserve-3d;
+	/*transform:rotateX(60deg);*/
+	text-shadow:0px 10px 40px rgba(0,0,0,0.5)
+	}
+</style>
+<body>
+	<div class="wutai">
+    		<div class="box" id="box">
+            	<img src="images/er.jpg">
+                <img src="images/fg.jpg">
+                <img src="images/rt.jpg">
+                <img src="images/we.jpg">
+                 <img src="images/rt.jpg">
+                <img src="images/we.jpg">
+                <img src="images/fg.jpg">
+                <img src="images/rt.jpg">
+                
+            </div>
+            <img id="but_l" src="images/l.png"/>
+            <img id="but_r" src="images/r.png"/>
+    </div>
+    <p class="name01">Veblen</p>
+</body>
+<script>
+window.onload=function(){
+	var x=0;
+	var box=document.getElementById("box");
+	var but_l=document.getElementById("but_l");
+	var but_r=document.getElementById("but_r");
+	var m=45;
+	for(var i=0;i<box.children.length;i++){
+				box.children[i].style.transform="rotateY("+m*i+"deg) translateZ(300px)"
+		}
+	/*
+		box.children[0].style.transform=" rotateY(315deg) translateZ(300px)";
+		box.children[1].style.transform=" rotateY(270deg) translateZ(300px)";
+		box.children[2].style.transform=" rotateY(225deg) translateZ(300px)";
+		box.children[3].style.transform=" rotateY(180deg) translateZ(300px)";
+		box.children[4].style.transform=" rotateY(135deg) translateZ(300px)";
+		box.children[5].style.transform=" rotateY(90deg) translateZ(300px)";
+		box.children[6].style.transform=" rotateY(45deg) translateZ(300px)";
+		box.children[7].style.transform=" rotateY(0deg) translateZ(300px)";*/
+	function huifu(){
+		box.style.transform="initial";
+		
+			};
+	setTimeout(huifu,1000)
+		
+	but_r.onclick=function(){
+		x=x+45;
+		y=-x+"deg";
+		box.style.transform="rotateY("+y+")"
+		}
+	but_l.onclick=function(){
+		x=x-45;
+		y=-x+"deg";
+		box.style.transform="rotateY("+y+")"
+		}
+		
+		}
+</script>
+</html>

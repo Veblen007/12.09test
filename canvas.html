@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#can{
+			background-color:black;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="can"></canvas>
+</body>
+<script>
+var can = document.getElementById("can");
+can.width = window.innerWidth;
+can.height = window.innerHeight;
+var context = can.getContext("2d");
+var balls = [];
+var colors = ["#f83600", "#FFF94C", "#0072ff", "#780206", "#7B920A", "#dc2430", "#A83279", "#00bf8f", "#FF512F", "#485563", "#061700", "#02AAB0"];
+var timer;
+function draw(ball) {
+    context.beginPath();
+    context.arc(ball.x, ball.y, ball.r, 0, Math.PI * 2);
+    context.fillStyle = ball.corlor;
+    context.globalCompositeOperation = "lighter";
+    context.fill()
+}
+function random(min, max) {
+    return Math.round(Math.random() * (max - min) + min)
+}
+function random2(){
+	var arr=[1,-1];
+	return arr[Math.round(Math.random()*1)];
+}
+var on = true;
+can.onmousemove=function(ev){
+	for(var i=0;i<5;i++){
+		var ball={
+			x:random(-5,5)+ev.clientX,
+			y:random(-5,5)+ev.clientY,
+			r:random(5,60),
+			vx:Math.random()-0.5,
+			vy:Math.random()-0.5,
+			corlor: colors[random(0, colors.length - 1)]
+		}
+		balls.push(ball);
+	}
+	// console.log(balls.length);
+	if (on) {
+        clearInterval(timer);
+        timer = setInterval(drawball, 30);
+        on = false
+    }
+	function drawball(){
+		console.log(balls.length)
+		context.clearRect(0, 0, can.width, can.height);
+		for(var i=0;i<balls.length;i++){
+			 balls[i].x += balls[i].vx * 10;
+	         balls[i].y += balls[i].vy * 8;
+	         balls[i].r = balls[i].r * 0.97;
+			 draw(balls[i]);
+			 if(balls[i].r<1){
+			 	balls.splice(balls[i].index,1);
+			 }
+		}
+	}
+}
+// can.onmousemove = function(ev) {
+//     for (var i = 0; i < 5; i++) {
+//         var ball = {
+//             x: random( - 5, 5) + ev.clientX,
+//             y: random( - 5, 5) + ev.clientY + window.pageYOffset,
+//             r: random(5, 60),
+//             vx: Math.random() - .5,
+//             vy: Math.random() - .5,
+//             corlor: colors[random(0, colors.length - 1)],
+//         };
+//         console.log(ball.corlor);
+//         balls.push(ball);
+//         if (balls.length > 500) {
+//             balls.shift()
+//         }
+//     }
+//     if (on) {
+//         clearInterval(timer);
+//         timer = setInterval(drallball, 30);
+//         on = false
+//     }
+//     function drallball() {
+//         context.clearRect(0, 0, can.width, can.height);
+//         for (var i = 0; i < balls.length; i++) {
+//             balls[i].x += balls[i].vx * 10;
+//             balls[i].y += balls[i].vy * 8;
+//             balls[i].r = balls[i].r * 0.97;
+//             balls[i].index = i;
+//             if (balls[i].r < 1) {
+//                 balls.splice(balls[i].index, 1);
+//                 continue
+//             }
+//             draw(balls[i]);
+//             if (!balls.length) {
+//                 clearInterval(timer);
+//                 on = true
+//             }
+//         }
+//     }
+// }
+</script>
+</html>

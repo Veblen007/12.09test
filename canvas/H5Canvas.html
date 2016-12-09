@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<title>Canvas旋转</title>
+	<style>
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		#can{
+			background-color: #000;
+			display: block;
+		}
+		body{
+
+		}
+		.list{
+			width: 100px;
+			height: 320px;
+			position: absolute;
+			top: 100px;left: 0;right: 0;
+			margin: auto;
+		}
+		.list li{
+			display: inline-block;
+			list-style: none;
+			position: absolute;
+			top: 0;left: 0;
+			transition: 1s;
+			border-radius: 20px;
+			overflow: hidden;
+			transform-origin: 20px 300px;
+			box-shadow: -2px 5px 5px #000;
+		}
+		.list:hover li:not(:hover){
+			filter: grayscale(1);
+
+		}
+		.list li div{
+			width: 100px;
+			height: 320px;
+			font: 80px/1.8 "苹方","微软雅黑";
+			color: #fff;
+			border-radius: 20px;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="can"></canvas>
+	<ul class="list">
+		<li><div style="background: linear-gradient(to top, #1A2980 , #26D0CE)">1</div></li>
+		<li><div style="background: linear-gradient(to top, #f79d00 , #64f38c)">2</div></li>
+		<li><div style="background: linear-gradient(to top, #fc00ff , #50db9e)">3</div></li>
+		<li><div style="background: linear-gradient(to top, #00C9FF , #92FE9D)">4</div></li>
+		<li><div style="background: linear-gradient(to top, #16A085 , #F4D03F)">5</div></li>
+		<li><div style="background: linear-gradient(to top, #1A2980 , #26D0CE)">6</div></li>
+		<li><div style="background: linear-gradient(to top, #fceabb , #f8b500)">7</div></li>
+		<li><div style="background: linear-gradient(to top, #c2e59c , #64b3f4)">8</div></li>
+		<li><div style="background: linear-gradient(to top, #C02425 , #F0CB35)">9</div></li>
+		<li><div style="background: linear-gradient(to top, #4CA1AF , #C4E0E5)">10</div></li>
+		<li><div style="background: linear-gradient(to top, #f79d00 , #64f38c)">11</div></li>
+		<li><div style="background: linear-gradient(to top, #f85032 , #e73827)">云和</div></li>
+	</ul>
+</body>
+<script>
+var nav=document.querySelector("ul");var lis=document.querySelectorAll("li");var flag=true;lis[lis.length-1].onclick=function(){for(var i=0;i<lis.length;i++){var n=i-lis.length/2;if(flag){n=n*15}else{n=360}console.log(n);lis[i].style.transform="rotate("+n+"deg)"};flag=!flag};for(var i=0;i<lis.length-1;i++){lis[i].index=i;lis[i].onclick=function(){var leftDeg=0;var rightDeg=15;this.style.transform="rotate(0deg)";for(var i=this.index-1;i>=0;i--){leftDeg-=15;lis[i].style.transform="rotate("+leftDeg+"deg)"}for(var i=this.index+1;i<lis.length;i++){rightDeg+=15;lis[i].style.transform="rotate("+rightDeg+"deg)"}}};var can=document.getElementById("can");can.width=window.innerWidth;can.height=window.innerHeight;var context=can.getContext("2d");var balls=[];var colors=["#f83600","#FFF94C","#0072ff","#780206","#7B920A","#dc2430","#A83279","#00bf8f","#FF512F","#485563","#061700","#02AAB0"];var timer;function draw(ball){context.beginPath();context.arc(ball.x,ball.y,ball.r,0,Math.PI*2);context.fillStyle=ball.corlor;context.globalCompositeOperation="lighter";context.fill()}function random(min,max){return Math.round(Math.random()*(max-min)+min)}var on=true;can.onmousemove=function(ev){for(var i=0;i<5;i++){var ball={x:random(-5,5)+ev.clientX,y:random(-5,5)+ev.clientY+window.pageYOffset,r:random(5,60),vx:Math.random()-.5,vy:Math.random()-.5,corlor:colors[random(0,colors.length-1)],};console.log(ball.corlor);balls.push(ball);if(balls.length>500){balls.shift()}}if(on){clearInterval(timer);timer=setInterval(drallball,30);on=false}function drallball(){context.clearRect(0,0,can.width,can.height);for(var i=0;i<balls.length;i++){balls[i].x+=balls[i].vx*10;balls[i].y+=balls[i].vy*8;balls[i].r=balls[i].r*0.97;balls[i].index=i;if(balls[i].r<1){balls.splice(balls[i].index,1);continue}draw(balls[i]);if(!balls.length){clearInterval(timer);on=true}}}}
+</script>
+</html>
